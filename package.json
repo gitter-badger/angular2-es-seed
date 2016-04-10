@@ -17,7 +17,7 @@
     "server:dev:hmr": "npm run server:dev -- --hot",
     "server:prod": "http-server dist --cors",
 
-    "lint": "eslint 'src/**/*.js'",
+    "js-lint": "eslint 'src/**/*.js'",
 
     "webdriver:update": "webdriver-manager update",
     "webdriver:start": "webdriver-manager start",

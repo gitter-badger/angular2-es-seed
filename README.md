@@ -126,6 +126,12 @@ $ npm run test
 $ npm run test:watch
 ```
 
+### run js lint
+
+```sh
+$ npm run js-lint
+```
+
 ### run end-to-end tests
 
 ```sh
