@@ -5,10 +5,10 @@ import {
 } from 'angular2/platform/browser';
 
 // Angular 2
-import {enableProdMode} from 'angular2/core';
+import { enableProdMode } from 'angular2/core';
 
 // Environment Providers
-var PROVIDERS = [];
+let PROVIDERS = [];
 
 if (process.env.NODE_ENV === 'production') {
   // Production

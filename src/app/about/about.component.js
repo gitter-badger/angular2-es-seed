@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import { Component } from 'angular2/core';
 
 /*
  * We're loading this component asynchronously
@@ -32,6 +32,7 @@ export class About {
     // if you're working with mock data you can also use http.get('assets/mock-data/mock-data.json')
     // this.asyncDataWithWebpack();
   }
+
   asyncDataWithWebpack() {
     // you can also async load mock data with 'es6-promise-loader'
     // you would do this if you don't want the mock-data bundled

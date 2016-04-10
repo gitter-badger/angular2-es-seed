@@ -1,19 +1,16 @@
-import {Injectable} from 'angular2/core';
-import {HmrState} from 'angular2-hmr';
+import { Injectable } from 'angular2/core';
+import { HmrState } from 'angular2-hmr';
 
 @Injectable()
 export class AppState {
   // HmrState uis used by HMR to track the any state during reloading
   @HmrState() _state = {};
 
-  constructor() {
-
-  }
-
   // already return a clone of the current state
   get state() {
     return this._state = this._clone(this._state);
   }
+
   // never allow mutation
   set state(value) {
     throw new Error('do not mutate the `.state` directly');
@@ -34,6 +31,6 @@ export class AppState {
 
   _clone(object) {
     // simple object clone
-    return JSON.parse(JSON.stringify( object ));
+    return JSON.parse(JSON.stringify(object));
   }
 }

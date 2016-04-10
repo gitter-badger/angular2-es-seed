@@ -18,9 +18,9 @@ import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angula
 import { MATERIAL_PROVIDERS } from './material';
 
 /*
-* Application Providers/Directives/Pipes
-* providers/directives/pipes that only live in our browser environment
-*/
+ * Application Providers/Directives/Pipes
+ * providers/directives/pipes that only live in our browser environment
+ */
 export const APPLICATION_PROVIDERS = [
   ...FORM_PROVIDERS,
   ...HTTP_PROVIDERS,

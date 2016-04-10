@@ -1,8 +1,8 @@
-import {Component} from 'angular2/core';
-import {AppState} from '../app.service';
+import { Component } from 'angular2/core';
+import { AppState } from '../app.service';
 
-import {Title} from './title';
-import {XLarge} from './x-large';
+import { Title } from './title';
+import { XLarge } from './x-large';
 
 @Component({
   // The selector is what angular internally uses
@@ -19,9 +19,9 @@ import {XLarge} from './x-large';
     XLarge
   ],
   // We need to tell Angular's compiler which custom pipes are in our template.
-  pipes: [ ],
+  pipes: [],
   // Our list of styles in our component. We may add more to compose many styles together
-  styles: [ require('./home.css') ],
+  styles: [require('./home.css')],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./home.html')
 })
@@ -29,7 +29,7 @@ export class Home {
   // Set our default values
   localState = { value: '' };
   // TypeScript public modifiers
-  constructor(appState: AppState, title: Title) {
+  constructor(appState:AppState, title:Title) {
     this.appState = appState;
     this.title = title;
   }

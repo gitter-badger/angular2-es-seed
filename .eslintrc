@@ -8,6 +8,16 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "describe": true,
+    "beforeEach": true,
+    "it": true,
+    "expect": true,
+    "element": true,
+    "by": true,
+    "browser": true,
+    "spyOn": true
+  },
   "root": true,
   "rules": {
     // disallow strict mode because we use babel

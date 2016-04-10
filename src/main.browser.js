@@ -6,14 +6,14 @@ import { bootstrap } from 'angular2/platform/browser';
  * Platform and Environment
  * our providers/directives/pipes
  */
-import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
-import {ENV_PROVIDERS} from './platform/environment';
+import { DIRECTIVES, PIPES, PROVIDERS } from './platform/browser';
+import { ENV_PROVIDERS } from './platform/environment';
 
 /*
  * App Component
  * our top level component that holds all of our components
  */
-import {App, APP_PROVIDERS} from './app';
+import { App, APP_PROVIDERS } from './app';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -31,9 +31,6 @@ export function main(initialHmrState) {
     .catch(err => console.error(err));
 
 }
-
-
-
 
 
 /*

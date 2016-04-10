@@ -1,13 +1,13 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component} from 'angular2/core';
-import {RouteConfig, Router} from 'angular2/router';
+import { Component } from 'angular2/core';
+import { RouteConfig } from 'angular2/router';
 
 import '../assets/css/main.scss';
 
-import {Home} from './home';
-import {AppState} from './app.service';
+import { Home } from './home';
+import { AppState } from './app.service';
 // import {RouterActive} from './router-active';
 
 /*
@@ -72,7 +72,7 @@ import {AppState} from './app.service';
   { path: '/', name: 'Index', component: Home, useAsDefault: true },
   { path: '/home', name: 'Home', component: Home },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
-  { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') },
+  { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
 ])
 export class App {
 
