@@ -47,7 +47,7 @@ const METADATA = {
   baseUrl: '/',
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || isProd ? 8080 : 3000,
-  ENV,
+  NODE_ENV: ENV,
   HMR: hasProcessFlag('hot')
 };
 
@@ -260,12 +260,9 @@ export default (() => {
        * @url https://webpack.github.io/docs/list-of-plugins.html#defineplugin
        */
       new DefinePlugin({
-        ENV: JSON.stringify(METADATA.ENV),
-        HMR: isProd ? false : METADATA.HMR,
         'process.env': {
-          ENV: JSON.stringify(METADATA.ENV),
-          NODE_ENV: JSON.stringify(METADATA.ENV),
-          HMR: METADATA.HMR
+          NODE_ENV: JSON.stringify(METADATA.NODE_ENV),
+          HMR: isProd ? false : METADATA.HMR
         }
       })
 

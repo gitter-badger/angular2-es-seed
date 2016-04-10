@@ -48,7 +48,7 @@ export function main(initialHmrState) {
  * Hot Module Reload
  * experimental version by @gdi2290
  */
-if (ENV === 'development' && HMR === true) {
+if (process.env.NODE_ENV === 'development' && process.env.HMR) {
   // activate hot module reload
   const ngHmr = require('angular2-hmr');
   ngHmr.hotModuleReplacement(main, module);

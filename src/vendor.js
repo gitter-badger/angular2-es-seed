@@ -26,7 +26,7 @@ import 'rxjs/add/operator/mergeMap';
 // import '@angular2-material/card';
 // look in platform/directives and platform/providers
 
-if (ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   // Production
 } else {
   // Development

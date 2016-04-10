@@ -1,7 +1,7 @@
 import 'core-js';
 require('zone.js/dist/zone');
 
-if (ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   Error.stackTraceLimit = Infinity;
   require('zone.js/dist/long-stack-trace-zone');
 }

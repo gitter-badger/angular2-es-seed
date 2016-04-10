@@ -8,10 +8,6 @@
     "browser": true,
     "node": true
   },
-  "globals": {
-    "ENV": true,
-    "HMR": true
-  },
   "root": true,
   "rules": {
     // disallow strict mode because we use babel
