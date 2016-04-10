@@ -91,39 +91,38 @@ After you have installed all dependencies you can now run the app. Run `npm star
 `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you 
 as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using express server, then it's `http://[::1]:3000`).
 
-## Other commands
+## Other notable commands
 
-### build files
+Please note, not all commands will be listed here, feel free to check out the npm scripts section in `package.json`.
+
+### build files for production and serve it
 
 ```sh
-# development
-$ npm run build:dev
-# production
+# production build
 $ npm run build:prod
+
+# serve it, on port 8080
+$ npm run server:prod
 ```
 
-### watch and build files
+### serve, watch and build files
 
 ```sh
+$ npm run server:dev
+
+# or
+
 $ npm start
 ```
 
-### watch and build files with hot module replacement
+### serve, watch and build files with hot module replacement
 
 ```sh
-$ npm run start:hmr
-```
+$ npm run server:dev:hmr
 
-### run unit tests
+# or
 
-```sh
-$ npm run test
-```
-
-### watch and run unit tests
-
-```sh
-$ npm run test:watch
+$ npm start:hmr
 ```
 
 ### run js lint
@@ -132,7 +131,19 @@ $ npm run test:watch
 $ npm run js-lint
 ```
 
-### run end-to-end tests
+### run unit tests
+
+```sh
+$ npm run test
+```
+
+### run unit tests in watch mode
+
+```sh
+$ npm run test:watch
+```
+
+### run end-to-end (aka. e2e, integration) tests
 
 ```sh
 $ npm run e2e
@@ -142,6 +153,7 @@ $ npm run e2e
 
 ```sh
 npm run webdriver:start
+
 # in a new tab
 npm run e2e:live
 ```
