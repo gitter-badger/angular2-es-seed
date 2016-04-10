@@ -1,4 +1,4 @@
-import webpackConfig from './webpack.config.js';
+import webpackConfig from './webpack';
 
 export default (config) => {
   config.set({

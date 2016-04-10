@@ -178,7 +178,7 @@ npm run e2e:live
 * How do I test a Service?
   * See issue [#130][40]
 * How do I make the repo work in a virtual machine?
-  * You need to use `0.0.0.0` instead of `localhost` at [`/config/webpack.config.js`][29]
+  * You need to use `0.0.0.0` instead of `localhost` at [`/config/webpack.js`][29]
 * What are the naming conventions for Angular 2?
   * [Angular 2 Style Guide][30]
 * How do I include bootstrap or jQuery?
@@ -220,7 +220,7 @@ npm run e2e:live
 [26]: https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively
 [27]: https://github.com/angularclass/awesome-angular2#current-browser-support-for-angular-2
 [28]: /src/app/home/home.spec.js
-[29]: /config/webpack.config.js#L48
+[29]: /config/webpack.js#L48
 [30]: https://mgechev.github.io/angular2-style-guide/
 [31]: https://github.com/AngularClass/angular2-webpack-starter/wiki/How-do-I-async-load-a-component-with-AsyncRoute
 [32]: https://github.com/AngularClass/
