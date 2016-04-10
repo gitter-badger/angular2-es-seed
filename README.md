@@ -1,10 +1,13 @@
 # angular2-es-seed
 
-[![Dependency Status](https://david-dm.org/codewareio/angular2-es-seed/status.svg)][1] [![devDependency Status](https://david-dm.org/codewareio/angular2-es-seed/dev-status.svg)][2]
+[![Dependency Status](https://david-dm.org/codewareio/angular2-es-seed/status.svg)][1] 
+[![devDependency Status](https://david-dm.org/codewareio/angular2-es-seed/dev-status.svg)][2]
 
 A complete, yet simple, starter for Angular 2 using ES2016.
 
-This seed repo serves as an Angular 2 starter for anyone looking to get up and running with **Angular 2** and **JavaScript** fast. Using **Webpack** for building our files and assisting with boilerplate. We're also using **Protractor** for our end-to-end story and **Karma** for our unit tests.
+This seed repo serves as an Angular 2 starter for anyone looking to get up and running with **Angular 2** and 
+**JavaScript** fast. Using **Webpack** for building our files and assisting with boilerplate. We're also 
+using **Protractor** for our end-to-end story and **Karma** for our unit tests.
 
 ## Notable features
 * **JS**
@@ -64,6 +67,7 @@ navigate to [http://localhost:3000][23] or [http://0.0.0.0:3000][24] in your bro
   * [Running the app](#running-the-app)
 * [Other commands](#other-commands)
 * [Testing](#testing)
+* [AngularClass](#angularclass)
 * [Frequently asked questions](#frequently-asked-questions)
 
 ## Dependencies
@@ -83,7 +87,9 @@ What you need to run this app:
 
 ## Running the app
 
-After you have installed all dependencies you can now run the app. Run `npm start` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using express server, then it's `http://[::1]:3000`).
+After you have installed all dependencies you can now run the app. Run `npm start` to start a local server using 
+`webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you 
+as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using express server, then it's `http://[::1]:3000`).
 
 ## Other commands
 
@@ -150,8 +156,15 @@ npm run e2e:live
 * interactive mode:
   * in a new tab: `npm run webdriver-start`
   * instead of the last command above, you can run: `npm run e2e-live`
-  * when debugging or first writing test suites, you may find it helpful to try out Protractor commands without starting up the entire test suite. You can do this with the element explorer.
+  * when debugging or first writing test suites, you may find it helpful to try out Protractor commands without 
+    starting up the entire test suite. You can do this with the element explorer.
+    
   * you can learn more about [Protractor Interactive Mode here][26]
+
+## AngularClass
+  This project is heavily inspired by [AngularClass][32]/[angular2-webpack-starter][33]. If you are looking for a 
+  [TypeScript][38] based Angular 2 seed i highly suggest you to check out [angular2-webpack-starter][33] or 
+  [angular2-seed][39].
 
 ## Frequently asked questions
 
@@ -160,15 +173,16 @@ npm run e2e:live
 * Where do I write my tests?
   * You can write your tests next to your component files. See [`/src/app/home/home.spec.js`][28]
 * How do I start the app when I get `EACCES` and `EADDRINUSE` errors?
-  * The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack to build files to `./dist/`
+  * The `EADDRINUSE` error means the port `3000` is currently being used and `EACCES` is lack of permission for webpack 
+    to build files to `./dist/`
 * How do I test a Service?
-  * See issue [#130](https://github.com/AngularClass/angular2-webpack-starter/issues/130#issuecomment-158872648)
+  * See issue [#130][40]
 * How do I make the repo work in a virtual machine?
   * You need to use `0.0.0.0` instead of `localhost` at [`/config/webpack.config.js`][29]
 * What are the naming conventions for Angular 2?
   * [Angular 2 Style Guide][30]
 * How do I include bootstrap or jQuery?
-  * please see issue [#215](https://github.com/AngularClass/angular2-webpack-starter/issues/215) and [#214](https://github.com/AngularClass/angular2-webpack-starter/issues/214#event-511768416)
+  * please see issue [#215][36] and [#214][37]
 * How do I async load a component?
   * see wiki [How-do-I-async-load-a-component-with-AsyncRoute][31]
 * How do I turn on Hot Module Replacement
@@ -209,3 +223,12 @@ npm run e2e:live
 [29]: /config/webpack.config.js#L48
 [30]: https://mgechev.github.io/angular2-style-guide/
 [31]: https://github.com/AngularClass/angular2-webpack-starter/wiki/How-do-I-async-load-a-component-with-AsyncRoute
+[32]: https://github.com/AngularClass/
+[33]: https://github.com/AngularClass/angular2-webpack-starter/
+[34]: https://github.com/preboot/
+[35]: https://github.com/preboot/angular2-webpack/
+[36]: https://github.com/AngularClass/angular2-webpack-starter/issues/215
+[37]: https://github.com/AngularClass/angular2-webpack-starter/issues/214#event-511768416
+[38]: http://www.typescriptlang.org/
+[39]: https://github.com/mgechev/angular2-seed/
+[40]: https://github.com/AngularClass/angular2-webpack-starter/issues/130#issuecomment-158872648
