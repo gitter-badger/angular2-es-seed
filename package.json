@@ -66,7 +66,6 @@
     "css-loader": "^0.23.1",
     "cssnano": "^3.5.2",
     "doiuse": "^2.3.0",
-    "dotenv": "^2.0.0",
     "es6-promise": "^3.1.2",
     "es6-promise-loader": "^1.0.1",
     "eslint": "^2.7.0",

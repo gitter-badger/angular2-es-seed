@@ -1,8 +1,5 @@
 import { getEnv, hasProcessFlag, root, packageSort } from './helpers';
 
-// Require and configure dotenv.
-require('dotenv').config();
-
 //
 // Webpack Plugins
 //
