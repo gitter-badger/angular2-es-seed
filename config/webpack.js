@@ -3,9 +3,9 @@ import { getEnv, hasProcessFlag, root, packageSort } from './helpers';
 // Require and configure dotenv.
 require('dotenv').config();
 
-/**
- * Webpack Plugins
- */
+//
+// Webpack Plugins
+//
 // const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
@@ -18,9 +18,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-/**
- * PostCSS Plugins
- */
+//
+// PostCSS Plugins
+//
 const cssnext = require('postcss-cssnext');
 const autoprefixer = require('autoprefixer');
 const assets = require('postcss-assets');
@@ -30,9 +30,9 @@ const stylelint = require('stylelint');
 const doiuse = require('doiuse');
 const colorguard = require('colorguard');
 
-/**
- * Webpack Constants
- */
+//
+// Webpack Constants
+//
 const ENV = getEnv(process.env.npm_lifecycle_event);
 
 const isProd = ENV === 'production';
@@ -53,55 +53,43 @@ const METADATA = {
 
 export default (() => {
 
-  /**
-   * Webpack configuration.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#cli
-   */
+  // Webpack configuration.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#cli
   const config = {};
 
   // Static metadata for index.html.
   config.metadata = METADATA;
 
-  /**
-   * Switch loaders to debug mode.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#debug
-   */
+  // Switch loaders to debug mode.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#debug
   config.debug = isDev;
 
-  /**
-   * Developer tool to enhance debugging.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#devtool
-   * @url https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-   */
+  // Developer tool to enhance debugging.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#devtool
+  // See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
   config.devtool = isProd ? 'source-map' : 'cheap-module-eval-source-map';
 
-  /**
-   * Cache generated modules and chunks to improve performance for multiple incremental builds.
-   * This is enabled by default in watch mode.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#cache
-   */
+  // Cache generated modules and chunks to improve performance for multiple incremental builds.
+  // This is enabled by default in watch mode.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#cache
   config.cache = isDev;
 
-  /**
-   * The entry point for the bundles.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#entry
-   */
+  // The entry point for the bundles.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#entry
   config.entry = isTest ? {} : {
     polyfills: './src/polyfills.js',
     vendor: './src/vendor.js',
     main: './src/main.browser.js'
   };
 
-  /**
-   * Options affecting the output of the compilation.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#output
-   */
+  // Options affecting the output of the compilation.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#output
   config.output = isTest ? {} : {
     path: root('dist'),
     filename: isProd ? '[name].[chunkhash].bundle.js' : '[name].bundle.js',
@@ -109,22 +97,18 @@ export default (() => {
     chunkFilename: isProd ? '[id].[chunkhash].chunk.js' : '[id].chunk.js'
   };
 
-  /**
-   * Options affecting the resolving of modules.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#resolve
-   */
+  // Options affecting the resolving of modules.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#resolve
   config.resolve = {
     extensions: ['', '.js'],
     root: root('src'),
     modulesDirectories: ['node_modules']
   };
 
-  /**
-   * Options affecting the normal modules.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#module
-   */
+  // Options affecting the normal modules.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#module
   config.module = {
 
     preLoaders: (() => {
@@ -246,19 +230,15 @@ export default (() => {
 
   };
 
-  /**
-   * Add additional plugins to the compiler.
-   *
-   * @url http://webpack.github.io/docs/configuration.html#plugins
-   */
+  // Add additional plugins to the compiler.
+  //
+  // See: http://webpack.github.io/docs/configuration.html#plugins
   config.plugins = (() => {
     const plugins = [
 
-      /**
-       * DefinePlugin
-       *
-       * @url https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-       */
+      // DefinePlugin
+      //
+      // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
       new DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify(METADATA.NODE_ENV),
@@ -271,44 +251,34 @@ export default (() => {
     if (!isTest) {
       plugins.push(
 
-        /**
-         * OccurenceOrderPlugin
-         *
-         * @url https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
-         * @url https://github.com/webpack/docs/wiki/optimization#minimize
-         */
+        // OccurenceOrderPlugin
+        //
+        // See: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
+        // See: https://github.com/webpack/docs/wiki/optimization#minimize
         new OccurenceOrderPlugin(true),
 
-        /**
-         * CommonsChunkPlugin
-         *
-         * @url https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-         * @url https://github.com/webpack/docs/wiki/optimization#multi-page-app
-         */
+        // CommonsChunkPlugin
+        //
+        // See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
+        // See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
         new CommonsChunkPlugin({ name: ['polyfills', 'vendor', 'main'].reverse(), minChunks: Infinity }),
 
-        /**
-         * CopyWebpackPlugin
-         *
-         * @url https://www.npmjs.com/package/copy-webpack-plugin
-         */
+        // CopyWebpackPlugin
+        //
+        // See: https://www.npmjs.com/package/copy-webpack-plugin
         new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]),
 
-        /**
-         * HtmlWebpackPlugin
-         *
-         * @url https://github.com/ampedandwired/html-webpack-plugin
-         */
+        // HtmlWebpackPlugin
+        //
+        // See: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
           template: 'src/index.html',
           chunksSortMode: packageSort(['polyfills', 'vendor', 'main'])
         }),
 
-        /**
-         * ExtractTextPlugin
-         *
-         * @url https://github.com/webpack/extract-text-webpack-plugin
-         */
+        // ExtractTextPlugin
+        //
+        // See: https://github.com/webpack/extract-text-webpack-plugin
         new ExtractTextPlugin('css/[name].[hash].css', { disable: !isProd })
       );
     }
@@ -316,26 +286,20 @@ export default (() => {
     if (isProd) {
       plugins.push(
 
-        /**
-         * WebpackMd5Hash
-         *
-         * @url https://www.npmjs.com/package/webpack-md5-hash
-         */
+        // WebpackMd5Hash
+        //
+        // See: https://www.npmjs.com/package/webpack-md5-hash
         new WebpackMd5Hash(),
 
-        /**
-         * DedupePlugin
-         *
-         * @url https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-         * @url https://github.com/webpack/docs/wiki/optimization#deduplication
-         */
+        // DedupePlugin
+        //
+        // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+        // See: https://github.com/webpack/docs/wiki/optimization#deduplication
         new DedupePlugin(),
 
-        /**
-         * UglifyJsPlugin
-         *
-         * @url https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-         */
+        // UglifyJsPlugin
+        //
+        // See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
         new UglifyJsPlugin({
           beautify: false,
           mangle: {
@@ -346,11 +310,9 @@ export default (() => {
           comments: false
         }),
 
-        /**
-         * CompressionPlugin
-         *
-         * @url https://github.com/webpack/compression-webpack-plugin
-         */
+        // CompressionPlugin
+        //
+        // See: https://github.com/webpack/compression-webpack-plugin
         new CompressionPlugin({
           test: /\.css$|\.html$|\.js$|\.map$/,
           threshold: 2 * 1024
@@ -362,38 +324,30 @@ export default (() => {
 
   })();
 
-  /**
-   * PostCSS loader configuration
-   *
-   * @url https://github.com/postcss/postcss-loader
-   */
+  // PostCSS loader configuration
+  //
+  // See: https://github.com/postcss/postcss-loader
   config.postcss = () => {
 
     const process = [
 
-      /**
-       * postcss-cssnext
-       *
-       * @url https://github.com/MoOx/postcss-cssnext
-       */
+      // postcss-cssnext
+      //
+      // See: https://github.com/MoOx/postcss-cssnext
       cssnext({
         warnForDuplicates: false
       }),
 
-      /**
-       * autoprefixer
-       *
-       * @url https://github.com/postcss/autoprefixer
-       */
+      // autoprefixer
+      //
+      // See: https://github.com/postcss/autoprefixer
       autoprefixer({
         browsers: ['last 2 versions']
       }),
 
-      /**
-       * postcss-assets
-       *
-       * @url https://github.com/assetsjs/postcss-assets
-       */
+      // postcss-assets
+      //
+      // See: https://github.com/assetsjs/postcss-assets
       assets({
         basePath: root('src'),
         loadPaths: [
@@ -408,11 +362,9 @@ export default (() => {
     if (isProd) {
       process.push(
 
-        /**
-         * cssnano
-         *
-         * @url https://github.com/ben-eb/cssnano
-         */
+        // cssnano
+        //
+        // See: https://github.com/ben-eb/cssnano
         cssnano({
           discardComments: { removeAll: true }
         })
@@ -422,35 +374,27 @@ export default (() => {
     return {
       lint: [
 
-        /**
-         * doiuse
-         *
-         * @url https://github.com/anandthakker/doiuse
-         */
+        // doiuse
+        //
+        // See: https://github.com/anandthakker/doiuse
         doiuse({
           browsers: ['last 2 versions']
           // , ignoreFiles: [cssLint.ignoreGlob]
         }),
 
-        /**
-         * colorguard
-         *
-         * @url https://github.com/SlexAxton/css-colorguard
-         */
+        // colorguard
+        //
+        // See: https://github.com/SlexAxton/css-colorguard
         colorguard(),
 
-        /**
-         * stylelint
-         *
-         * @url https://github.com/stylelint/stylelint
-         */
+        // stylelint
+        //
+        // See: https://github.com/stylelint/stylelint
         stylelint(),
 
-        /**
-         * postcss-reporter
-         *
-         * @url https://github.com/postcss/postcss-reporter
-         */
+        // postcss-reporter
+        //
+        // See: https://github.com/postcss/postcss-reporter
         reporter({ clearMessages: true })
 
       ],
@@ -459,22 +403,18 @@ export default (() => {
     };
   };
 
-  /**
-   * Sass loader configuration
-   *
-   * @url https://github.com/jtangelder/sass-loader
-   */
+  // Sass loader configuration
+  //
+  // See: https://github.com/jtangelder/sass-loader
   config.sassLoader = {
     data: `$env: ${METADATA.ENV};`
   };
 
   if (true || isDev && !esLintIdeSupport || isProd || isTest && !esLintIdeSupport) {
 
-    /**
-     * Eslint loader configuration
-     *
-     * @url https://github.com/MoOx/eslint-loader
-     */
+    // Eslint loader configuration
+    //
+    // See: https://github.com/MoOx/eslint-loader
     config.eslint = {
       emitError: isProd,
       emitWarning: true,
@@ -485,11 +425,9 @@ export default (() => {
 
   if (isDev || isTest) {
 
-    /**
-     * Webpack Development Server configuration
-     *
-     * @url https://webpack.github.io/docs/webpack-dev-server.html
-     */
+    // Webpack Development Server configuration
+    //
+    // See: https://webpack.github.io/docs/webpack-dev-server.html
     config.devServer = {
       port: METADATA.port,
       host: METADATA.host,
@@ -505,12 +443,10 @@ export default (() => {
 
   if (isProd) {
 
-    /**
-     * Html loader advanced options
-     *
-     * @todo Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
-     * @url https://github.com/webpack/html-loader#advanced-options
-     */
+    // Html loader advanced options
+    //
+    // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
+    // See: https://github.com/webpack/html-loader#advanced-options
     config.htmlLoader = {
       minimize: true,
       removeAttributeQuotes: false,
@@ -521,11 +457,9 @@ export default (() => {
 
   }
 
-  /**
-   * Node configuration
-   *
-   * @url https://webpack.github.io/docs/configuration.html#node
-   */
+  // Node configuration
+  //
+  // See: https://webpack.github.io/docs/configuration.html#node
   config.node = {
     global: 'window',
     process: true,
