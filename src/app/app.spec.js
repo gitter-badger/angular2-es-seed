@@ -1,5 +1,3 @@
-/* global describe, expect */
-
 import {
   it,
   inject,

@@ -16,7 +16,8 @@
     "element": true,
     "by": true,
     "browser": true,
-    "spyOn": true
+    "spyOn": true,
+    "jasmine": true
   },
   "root": true,
   "rules": {
