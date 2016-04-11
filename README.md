@@ -70,12 +70,14 @@ navigate to [http://localhost:3000][23] or [http://0.0.0.0:3000][24] in your bro
 * [AngularClass](#angularclass)
 * [Frequently asked questions](#frequently-asked-questions)
 
+
 ## Dependencies
 
 What you need to run this app:
 
 * `node` and `npm` (use [NVM][25])
 * Ensure you're running Node (`v4.1.x`+) and NPM (`2.14.x`+)
+
 
 ## Installing
 
@@ -85,13 +87,15 @@ What you need to run this app:
 * `npm start` to start the dev server
 * navigate to [http://localhost:3000][23]
 
+
 ## Running the app
 
 After you have installed all dependencies you can now run the app. Run `npm start` to start a local server using 
 `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you 
 as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using express server, then it's `http://[::1]:3000`).
 
-## Other notable commands
+
+## Other commands
 
 Please note, not all commands will be listed here, feel free to check out the npm scripts section in `package.json`.
 
@@ -179,10 +183,12 @@ npm run e2e:live
     
   * you can learn more about [Protractor Interactive Mode here][26]
 
+
 ## AngularClass
   This project is heavily inspired by [AngularClass][32]/[angular2-webpack-starter][33]. If you are looking for a 
   [TypeScript][38] based Angular 2 seed i highly suggest you to check out [angular2-webpack-starter][33] or 
   [angular2-seed][39].
+
 
 ## Frequently asked questions
 
