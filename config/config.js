@@ -1,9 +1,48 @@
 import { join, resolve } from 'path';
 import { isUndefined } from 'lodash';
 
+export const ENV = getEnv(process.env.npm_lifecycle_event);
+export const IS_PROD = ENV === 'production';
+export const IS_DEV = ENV === 'development';
+export const IS_TEST = ENV === 'test';
 
-/** @param {string} _root - project root path */
-const _root = resolve(__dirname, '..');
+export const HOST = process.env.HOST || 'localhost';
+export const PORT = process.env.PORT || IS_PROD ? 8080 : 3000;
+
+export const CSS_LINT_IDE_SUPPORT = false;
+export const ES_LINT_IDE_SUPPORT = true;
+
+export const ROOT = resolve(__dirname, '..');
+
+export const HTML_METADATA = {
+  lang: 'en',
+  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  description: 'description',
+  baseUrl: '/',
+  analytics: 'UA-71073175-1'
+};
+
+//
+// Utils
+//
+
+/**
+ * Decide is css linting is needed.
+ *
+ * @returns {boolean}
+ */
+export function enableCSSLint() {
+  return IS_DEV && !CSS_LINT_IDE_SUPPORT || IS_PROD;
+}
+
+/**
+ * Decide is js linting is needed.
+ *
+ * @returns {boolean}
+ */
+export function enableESLint() {
+  return IS_DEV && !ES_LINT_IDE_SUPPORT || IS_PROD || IS_TEST && !ES_LINT_IDE_SUPPORT;
+}
 
 /**
  * Check if the command line arguments contains `flag`.
@@ -22,7 +61,7 @@ export function hasProcessFlag(flag) {
  * @returns {string}
  */
 export function root(...args) {
-  return join(_root, args.join(','));
+  return join(ROOT, args.join(','));
 }
 
 /**
@@ -87,3 +126,4 @@ export function packageSort(packages) {
     }
   };
 }
+

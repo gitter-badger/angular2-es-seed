@@ -50,6 +50,8 @@
     // disable return before else
     "no-else-return": 0,
     // disable early use
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    // disable disallow shadowing
+    "no-shadow": 0
   }
 }

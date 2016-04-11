@@ -1,52 +1,45 @@
-import { getEnv, hasProcessFlag, root, packageSort } from './helpers';
+import {
+  ENV,
+  IS_PROD,
+  IS_DEV,
+  IS_TEST,
+  HOST,
+  PORT,
+  enableCSSLint,
+  enableESLint,
+  HTML_METADATA,
+  hasProcessFlag,
+  root,
+  packageSort
+} from './config';
 
 //
 // Webpack Plugins
 //
-// const ProvidePlugin = require('webpack/lib/ProvidePlugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
-const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-const CompressionPlugin = require('compression-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// import ProvidePlugin from 'webpack/lib/ProvidePlugin';
+import DefinePlugin from 'webpack/lib/DefinePlugin';
+import OccurenceOrderPlugin from 'webpack/lib/optimize/OccurenceOrderPlugin';
+import DedupePlugin from 'webpack/lib/optimize/DedupePlugin';
+import UglifyJsPlugin from 'webpack/lib/optimize/UglifyJsPlugin';
+import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
+import CompressionPlugin from 'compression-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackMd5Hash from 'webpack-md5-hash';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 //
 // PostCSS Plugins
 //
-const cssnext = require('postcss-cssnext');
-const autoprefixer = require('autoprefixer');
-const assets = require('postcss-assets');
-const cssnano = require('cssnano');
-const reporter = require('postcss-reporter');
-const stylelint = require('stylelint');
-const doiuse = require('doiuse');
-const colorguard = require('colorguard');
+import cssnext from 'postcss-cssnext';
+import autoprefixer from 'autoprefixer';
+import assets from 'postcss-assets';
+import cssnano from 'cssnano';
+import reporter from 'postcss-reporter';
+import stylelint from 'stylelint';
+import doiuse from 'doiuse';
+import colorguard from 'colorguard';
 
-//
-// Webpack Constants
-//
-const ENV = getEnv(process.env.npm_lifecycle_event);
-
-const isProd = ENV === 'production';
-const isDev = ENV === 'development';
-const isTest = ENV === 'test';
-
-const cssLintIdeSupport = false;
-const esLintIdeSupport = true;
-
-const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
-  baseUrl: '/',
-  host: process.env.HOST || 'localhost',
-  port: process.env.PORT || isProd ? 8080 : 3000,
-  NODE_ENV: ENV,
-  HMR: hasProcessFlag('hot')
-};
 
 export default (() => {
 
@@ -55,30 +48,30 @@ export default (() => {
   // See: http://webpack.github.io/docs/configuration.html#cli
   const config = {};
 
-  // Static metadata for index.html.
-  config.metadata = METADATA;
+  // Static metadata that will be consumed in index.html by HtmlWebpackPlugin.
+  config.metadata = HTML_METADATA;
 
   // Switch loaders to debug mode.
   //
   // See: http://webpack.github.io/docs/configuration.html#debug
-  config.debug = isDev;
+  config.debug = IS_DEV;
 
   // Developer tool to enhance debugging.
   //
   // See: http://webpack.github.io/docs/configuration.html#devtool
   // See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-  config.devtool = isProd ? 'source-map' : 'cheap-module-eval-source-map';
+  config.devtool = IS_PROD ? 'source-map' : 'cheap-module-eval-source-map';
 
   // Cache generated modules and chunks to improve performance for multiple incremental builds.
   // This is enabled by default in watch mode.
   //
   // See: http://webpack.github.io/docs/configuration.html#cache
-  config.cache = isDev;
+  config.cache = IS_DEV;
 
   // The entry point for the bundles.
   //
   // See: http://webpack.github.io/docs/configuration.html#entry
-  config.entry = isTest ? {} : {
+  config.entry = IS_TEST ? {} : {
     polyfills: './src/polyfills.js',
     vendor: './src/vendor.js',
     main: './src/main.browser.js'
@@ -87,11 +80,11 @@ export default (() => {
   // Options affecting the output of the compilation.
   //
   // See: http://webpack.github.io/docs/configuration.html#output
-  config.output = isTest ? {} : {
+  config.output = IS_TEST ? {} : {
     path: root('dist'),
-    filename: isProd ? '[name].[chunkhash].bundle.js' : '[name].bundle.js',
-    sourceMapFilename: isProd ? '[name].[chunkhash].bundle.map' : '[name].map',
-    chunkFilename: isProd ? '[id].[chunkhash].chunk.js' : '[id].chunk.js'
+    filename: IS_PROD ? '[name].[chunkhash].bundle.js' : '[name].bundle.js',
+    sourceMapFilename: IS_PROD ? '[name].[chunkhash].bundle.map' : '[name].map',
+    chunkFilename: IS_PROD ? '[id].[chunkhash].chunk.js' : '[id].chunk.js'
   };
 
   // Options affecting the resolving of modules.
@@ -111,7 +104,7 @@ export default (() => {
     preLoaders: (() => {
       const preLoaders = [];
 
-      if (isDev && !cssLintIdeSupport || isProd) {
+      if (enableCSSLint()) {
         preLoaders.push(
 
           // Lints css with PostCSS.
@@ -128,7 +121,7 @@ export default (() => {
         );
       }
 
-      if (true || isDev && !esLintIdeSupport || isProd || isTest) {
+      if (enableESLint()) {
         preLoaders.push(
 
           // Eslint loader support for *.js files
@@ -150,7 +143,7 @@ export default (() => {
         test: /\.js?$/,
         loader: 'babel',
         query: {
-          cacheDirectory: isDev
+          cacheDirectory: IS_DEV
         },
         exclude: /node_modules/
       },
@@ -164,7 +157,7 @@ export default (() => {
       // Transforms css with PostCSS. All css in src/style will be bundled in an external css file.
       {
         test: /\.css$/,
-        loader: isTest
+        loader: IS_TEST
           ? 'null'
           : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss?pack=process'),
         exclude: root('src/app')
@@ -180,7 +173,7 @@ export default (() => {
       // Transforms scss with Sass, PostCSS. All scss in src/style will be bundled in an external css file.
       {
         test: /\.scss$/,
-        loader: isTest
+        loader: IS_TEST
           ? 'null'
           : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss?pack=process!sass?sourceMap'),
         exclude: root('src/app')
@@ -205,7 +198,7 @@ export default (() => {
     postLoaders: (() => {
       const postLoaders = [];
 
-      if (isTest) {
+      if (IS_TEST) {
         postLoaders.push(
 
           // Instruments JS files with Istanbul for subsequent code coverage reporting.
@@ -238,14 +231,14 @@ export default (() => {
       // See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
       new DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify(METADATA.NODE_ENV),
-          HMR: isProd ? false : METADATA.HMR
+          NODE_ENV: JSON.stringify(ENV),
+          HMR: IS_PROD ? false : hasProcessFlag('hot')
         }
       })
 
     ];
 
-    if (!isTest) {
+    if (!IS_TEST) {
       plugins.push(
 
         // OccurenceOrderPlugin
@@ -276,11 +269,11 @@ export default (() => {
         // ExtractTextPlugin
         //
         // See: https://github.com/webpack/extract-text-webpack-plugin
-        new ExtractTextPlugin('css/[name].[hash].css', { disable: !isProd })
+        new ExtractTextPlugin('css/[name].[hash].css', { disable: !IS_PROD })
       );
     }
 
-    if (isProd) {
+    if (IS_PROD) {
       plugins.push(
 
         // WebpackMd5Hash
@@ -356,7 +349,7 @@ export default (() => {
 
     ];
 
-    if (isProd) {
+    if (IS_PROD) {
       process.push(
 
         // cssnano
@@ -404,30 +397,30 @@ export default (() => {
   //
   // See: https://github.com/jtangelder/sass-loader
   config.sassLoader = {
-    data: `$env: ${METADATA.ENV};`
+    data: `$env: ${ENV};`
   };
 
-  if (true || isDev && !esLintIdeSupport || isProd || isTest && !esLintIdeSupport) {
+  if (enableESLint()) {
 
     // Eslint loader configuration
     //
     // See: https://github.com/MoOx/eslint-loader
     config.eslint = {
-      emitError: isProd,
+      emitError: IS_PROD,
       emitWarning: true,
-      failOnError: isProd
+      failOnError: IS_PROD
     };
 
   }
 
-  if (isDev || isTest) {
+  if (IS_DEV || IS_TEST) {
 
     // Webpack Development Server configuration
     //
     // See: https://webpack.github.io/docs/webpack-dev-server.html
     config.devServer = {
-      port: METADATA.port,
-      host: METADATA.host,
+      port: PORT,
+      host: HOST,
       historyApiFallback: true,
       watchOptions: {
         aggregateTimeout: 300,
@@ -438,7 +431,7 @@ export default (() => {
 
   }
 
-  if (isProd) {
+  if (IS_PROD) {
 
     // Html loader advanced options
     //

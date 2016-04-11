@@ -1,10 +1,10 @@
-import { root, rootNode } from './helpers';
+import { root, rootNode, HOST, PORT } from './config';
 import SpecReporter from 'jasmine-spec-reporter';
 
 export default {
 
   // A base URL for your application under test.
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: `http://${HOST}:${PORT}/`,
 
   // List of files / patterns to load.
   specs: [
