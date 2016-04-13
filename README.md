@@ -1,5 +1,7 @@
 # angular2-es-seed
 
+[![Join the chat at https://gitter.im/codewareio/angular2-es-seed](https://badges.gitter.im/codewareio/angular2-es-seed.svg)](https://gitter.im/codewareio/angular2-es-seed?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Dependency Status](https://david-dm.org/codewareio/angular2-es-seed/status.svg)][1] 
 [![devDependency Status](https://david-dm.org/codewareio/angular2-es-seed/dev-status.svg)][2]
 
