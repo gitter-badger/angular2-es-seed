@@ -60,7 +60,14 @@ export default (() => {
   //
   // See: http://webpack.github.io/docs/configuration.html#devtool
   // See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-  config.devtool = IS_PROD ? 'source-map' : 'cheap-module-eval-source-map';
+  // See: https://github.com/webpack/karma-webpack#source-maps
+  if (IS_PROD) {
+    config.devtool = 'source-map';
+  } else if (IS_TEST) {
+    config.devtool = 'inline-source-map';
+  } else {
+    config.devtool = 'cheap-module-eval-source-map';
+  }
 
   // Cache generated modules and chunks to improve performance for multiple incremental builds.
   // This is enabled by default in watch mode.
